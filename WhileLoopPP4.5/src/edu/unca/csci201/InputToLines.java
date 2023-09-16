@@ -8,10 +8,10 @@ public class InputToLines {
 	Scanner scan = new Scanner(System.in);
 	System.out.print("Enter a word to print by characters: ");
 	String input = scan.nextLine();
-	
+
 	// Loops through characters and prints them
-	for(int i = 0; i < input.length(); i++) {
-	    System.out.println(input.substring(i,i+1));
+	for (int i = 0; i < input.length(); i++) {
+	    System.out.println(input.substring(i, i + 1));
 	}
     }
 

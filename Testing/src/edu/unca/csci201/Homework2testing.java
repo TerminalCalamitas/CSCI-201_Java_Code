@@ -1,7 +1,5 @@
 package edu.unca.csci201;
 
-import java.util.Scanner;
-
 public class Homework2testing {
 
     public static void main(String[] args) {
