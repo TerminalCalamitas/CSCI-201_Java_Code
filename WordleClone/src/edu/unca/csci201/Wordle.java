@@ -4,7 +4,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Wordle {
-    	HiddenWord target;
+    	private HiddenWord target;
+    	private boolean isWin;
 
 	public Wordle() {
 	    System.out.print("Welcome to my Wordle Clone!\n" + "Press enter to play with a random word,\n"
@@ -12,26 +13,16 @@ public class Wordle {
 	}
 
 	public void play() {
-		Scanner scan = new Scanner(System.in);
-		Random rand = new Random();
-
-		int intIndex;
-
-		
-		String stringIndex = scan.nextLine();
-
-		if (stringIndex == "") {
-			intIndex = rand.nextInt(999);
-		} else {
-			intIndex = Integer.parseInt(stringIndex);
+	    int turns = 0;
+		while (!isWin && turns < 6) {
+		    playTurn();
+		    turns++;
 		}
-		System.out.println(intIndex);
 	}
 	
 	private void playTurn() {
-		
+		System.out.println("helo");
 	}
 	
-	private
 
 }

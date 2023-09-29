@@ -1,29 +1,55 @@
 package edu.unca.csci201;
 
-import java.util.Scanner;
 import java.io.*;
+import java.util.Scanner;
 
 public class WordList {
-	String	WordList[];
+
+    String[] wordlist;
+
+    public WordList() throws IOException {
+	loadList();
+    }
+
+    public int size() {
+	return this.wordlist.length;
+    }
+
+    public String getWord(int index) {
+	return this.wordlist[index];
+    }
+
+    public boolean inList(String word) {
+	boolean present = false;
 	
-	public WordList() throws IOException {
-		String word;
-		Scanner fileScan = new Scanner(new File("answerlist.txt"));
-		
+	for (int i= 0; i < this.wordlist.length; i++) {
+	    if (word == this.wordlist[i]) {
+		present = true;
+	    }
 	}
 	
-	public int size() throws IOException {
-		return 1;
+	return present;
+    }
+
+    private void loadList() throws FileNotFoundException {
+	Scanner fileScan;
+
+	fileScan = new Scanner(new File("wordlist.txt"));
+	// count the lines first
+	int lineCount = 0;
+	while (fileScan.hasNext()) {
+	    fileScan.nextLine();
+	    lineCount++;
 	}
-	
-	public String getWord(int index)  throws IOException {
-		
-		
-		return "hello";	
+	this.wordlist = new String[lineCount];
+
+	fileScan = new Scanner(new File("wordlist.txt"));
+
+	int count = 0;
+	while (fileScan.hasNext()) {
+	    this.wordlist[count] = fileScan.nextLine();
+	    count++;
 	}
-	
-	public boolean inList(String word)  throws IOException {
-		 return true;
-	}
+    }
 
 }
