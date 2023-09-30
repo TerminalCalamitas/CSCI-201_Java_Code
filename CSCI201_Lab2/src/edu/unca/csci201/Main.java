@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 /*
  * Lab2: demonstrate MathVector class for working with arrays and loops
+ * Code by Caleb and Andrew
  */
 public class Main {
 
