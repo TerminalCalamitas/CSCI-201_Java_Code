@@ -7,8 +7,8 @@ public class WordList {
 
     String[] wordlist;
 
-    public WordList() throws IOException {
-	loadList();
+    public WordList(String filename) throws FileNotFoundException {
+	loadList(filename);
     }
 
     public int size() {
@@ -21,20 +21,19 @@ public class WordList {
 
     public boolean inList(String word) {
 	boolean present = false;
-	
-	for (int i= 0; i < this.wordlist.length; i++) {
-	    if (word == this.wordlist[i]) {
+	word = word.toLowerCase();
+	for (int i = 0; i < wordlist.length; i++) {
+	    if (word.equals(wordlist[i])) {
 		present = true;
 	    }
 	}
-	
 	return present;
     }
 
-    private void loadList() throws FileNotFoundException {
+    private void loadList(String filename) throws FileNotFoundException {
 	Scanner fileScan;
 
-	fileScan = new Scanner(new File("wordlist.txt"));
+	fileScan = new Scanner(new File(filename));
 	// count the lines first
 	int lineCount = 0;
 	while (fileScan.hasNext()) {
@@ -43,7 +42,7 @@ public class WordList {
 	}
 	this.wordlist = new String[lineCount];
 
-	fileScan = new Scanner(new File("wordlist.txt"));
+	fileScan = new Scanner(new File(filename));
 
 	int count = 0;
 	while (fileScan.hasNext()) {

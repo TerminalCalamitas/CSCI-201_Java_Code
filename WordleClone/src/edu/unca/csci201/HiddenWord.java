@@ -5,40 +5,64 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class HiddenWord {
-	String hiddenword;
-	
-	
-	public HiddenWord(String word) {
-	    this.hiddenword = word.toUpperCase();
+    String hiddenword;
+    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private String[] letterColors = new String[26];
+
+    final String GREEN_BACKGROUND = "\u001B[42m";
+    final String YELLOW_BACKGROUND = "\u001b[43m";
+    final String BLACK_BACKGROUND = "\u001b[40m";
+    final String BACKGROUND_RESET = "\u001b[0m";
+
+    public HiddenWord(String word) {
+	this.hiddenword = word.toUpperCase();
+	for (int i = 0; i < alphabet.length(); i++) {
+	    letterColors[i] = BACKGROUND_RESET + "";
 	}
-	
-	public String evaluateGuess(String guess) {
-		
+    }
+
+    public String evaluateGuess(String guess) {
+	String formattedText = "";
+	String evaluation = "";
+
+	for (int i = 0; i < guess.length(); i++) {
+	    String guessLocation = guess.substring(i, i + 1);
+	    String hiddenLocation = hiddenword.substring(i, i + 1);
+	    int alphabetLocation = alphabet.indexOf(guessLocation);
+
+	    if (hiddenLocation.equals(guessLocation)) {
+		formattedText = formattedText + GREEN_BACKGROUND + guessLocation;
+		letterColors[alphabetLocation] = GREEN_BACKGROUND + "";
+		evaluation = evaluation + "G";
+
+	    } else if (hiddenword.indexOf(guessLocation) != (-1)) {
+		formattedText = formattedText + YELLOW_BACKGROUND + guessLocation;
+		letterColors[alphabetLocation] = YELLOW_BACKGROUND + "";
+		evaluation = evaluation + "Y";
+
+	    } else {
+		formattedText = formattedText + BLACK_BACKGROUND + guessLocation;
+		letterColors[alphabetLocation] = BLACK_BACKGROUND + "";
+		evaluation = evaluation + "_";
+	    }
+
 	}
-	
-	public String toString() {
-		return "HiddenWord: " +hiddenword;
+
+	formattedText = formattedText + BACKGROUND_RESET;
+	System.out.println(formattedText);
+
+	if (!evaluation.equals("GGGGG")) {
+	    for (int i = 0; i < alphabet.length(); i++) {
+		System.out.print(letterColors[i] + alphabet.substring(i, i + 1));
 	    }
-	
-	private void loadList() throws FileNotFoundException {
-		Scanner fileScan;
+	    System.out.println(BACKGROUND_RESET);
 
-		fileScan = new Scanner(new File("wordlist.txt"));
-		// count the lines first
-		int lineCount = 0;
-		while (fileScan.hasNext()) {
-		    fileScan.nextLine();
-		    lineCount++;
-		}
-		this.wordlist = new String[lineCount];
+	}
+	return evaluation;
+    }
 
-		fileScan = new Scanner(new File("wordlist.txt"));
-
-		int count = 0;
-		while (fileScan.hasNext()) {
-		    this.wordlist[count] = fileScan.nextLine();
-		    count++;
-		}
-	    }
+    public String toString() {
+	return "HiddenWord: " + hiddenword;
+    }
 
 }

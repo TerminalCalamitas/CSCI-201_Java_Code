@@ -5,6 +5,7 @@ import java.util.Arrays;
 /*
  * Class representing a mathematical vector
  * Code by Caleb and Andrew
+ * 
  */
 public class MathVector {
 	// complete this class
