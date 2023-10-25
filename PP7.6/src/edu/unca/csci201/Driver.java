@@ -79,8 +79,12 @@ public class Driver {
 		break;
 		
 	    case 3:
-		accounts[accNum] = null;
-		System.out.println("Account removed.");
+		if (accounts[accNum] != null) {
+		    accounts[accNum] = null;
+		    System.out.println("Account removed.");
+		} else {
+		    System.out.println("That account does not exist");
+		}
 		break;
 		
 	    case 4:
