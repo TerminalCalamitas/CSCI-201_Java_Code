@@ -7,7 +7,6 @@ public class Player {
     private int heightInInches;
     
     public Player(String name, String position, int height) {
-	// TODO Auto-generated constructor stub
 	this.name = name;
 	this.position = position;
 	this.heightInInches = height;
