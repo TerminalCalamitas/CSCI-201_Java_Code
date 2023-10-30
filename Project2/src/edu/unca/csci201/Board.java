@@ -1,8 +1,8 @@
 package edu.unca.csci201;
 
 public class Board {
-    int width = 7;
-    int height = 6;
+    private int width = 7;
+    private int height = 6;
     Column[] board = new Column[width];
 
     public Board() {
