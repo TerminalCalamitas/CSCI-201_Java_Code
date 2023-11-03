@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Sphere s1 = new Sphere("baseball", 1.43);
         Sphere s2 = new Sphere("eyeball", 0.475);
-        Cube c1 = new Cube("rubik's cube", 2.125984, "multi color");
-        Cube c2 = new Cube("sugar cube",5.24148278842, "white");
+        Cube c1 = new Cube("rubik's cube", 2.126, "multi color");
+        Cube c2 = new Cube("sugar cube",5.241, "white");
         
         System.out.println(s1.getShapeName());
         System.out.println(s1.getVolume());

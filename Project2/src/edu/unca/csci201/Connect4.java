@@ -120,7 +120,7 @@ public class Connect4 {
     // Mostly the same as the horizontalCheck
     private static boolean verticalCheck(Column column, char playerLetter) {
 	int lineLength = 0;
-	for (int i = 0; i < column.size; i++) {
+	for (int i = 0; i < 7; i++) {
 	    if (lineLength != 4) { // Avoid changing a win condition
 		if (column.column[i] != null && column.column[i].color == playerLetter) {
 		    lineLength++;
