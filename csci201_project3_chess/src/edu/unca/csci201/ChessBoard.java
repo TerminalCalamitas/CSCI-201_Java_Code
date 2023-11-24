@@ -11,12 +11,17 @@ public class ChessBoard {
 	    int column = code.charAt(0) - 'a';
 	    int rowChar = code.charAt(1) - '0';
 	    int row = 8 - rowChar;
+	    piece.setPosition(code);
 	    
-	    board[column][row] = piece;
+	    board[row][column] = piece;
 	}
 	
 	// returns the captured ChessPiece or null
 	public ChessPiece move(String codeStart, String codeEnd) throws IllegalMoveException {
+	    if (!validateCode(codeStart) || !validateCode(codeEnd)) {
+		throw new IllegalMoveException("ERROR: illegal move attempted");
+	    }
+	    
 	    int colStart = codeStart.charAt(0) - 'a';
 	    int rowCharStart = codeStart.charAt(1) - '0';
 	    int rowStart = 8 - rowCharStart;
@@ -24,9 +29,27 @@ public class ChessBoard {
 	    int colEnd = codeEnd.charAt(0) - 'a';
 	    int rowCharEnd = codeEnd.charAt(1) - '0';
 	    int rowEnd = 8 - rowCharEnd;
+
+	    ChessPiece capturedPiece = board[rowEnd][colEnd];
 	    
-	    board[colEnd][rowEnd] = board[colStart][rowStart];
-	    board[colStart][rowStart] = null;
+	    board[rowStart][colStart].setPosition(codeEnd);
+	    board[rowEnd][colEnd] = board[rowStart][colStart];
+	    board[rowStart][colStart] = null;
+	    
+	    return capturedPiece;
+	}
+	
+	private boolean validateCode(String code) {
+	    int col = code.charAt(0) - 'a';
+	    int rowChar = code.charAt(1) - '0';
+	    int row = 8 - rowChar;
+	    
+	    if (col > 7 || col < 0 || row > 7 || row < 0) {
+		return false;
+	    }
+	    
+	    ChessPiece capturedPiece = board[row][col];
+	    return capturedPiece == null || capturedPiece.validMove(code);
 	}
 			
 	public String toString() {

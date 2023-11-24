@@ -14,7 +14,10 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean validMove(String code) {
-	return false;
+	int col = code.charAt(0) - 'a';
+	int rowChar = code.charAt(1) - '0';
+	int row = 8 - rowChar;
+	return row <=7 && row >= 0 && col <=7 && col >= 0;
     }
 
 }
