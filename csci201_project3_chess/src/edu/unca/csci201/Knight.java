@@ -4,7 +4,7 @@ public class Knight extends ChessPiece {
 
     public Knight(int color) {
 	super(color);
-	this.abbreviation = 'N';    
+	this.abbreviation = 'N';
 
     }
 
@@ -15,10 +15,17 @@ public class Knight extends ChessPiece {
 
     @Override
     public boolean validMove(String code) {
-	int col = code.charAt(0) - 'a';
-	int rowChar = code.charAt(1) - '0';
-	int row = 8 - rowChar;
-	return row <=7 && row >= 0 && col <=7 && col >= 0;
+	int[] relCoords = findRelCoords(code);
+	int[] finalCoords = parseCode(code);
+
+	if( (Math.abs(relCoords[0]) == 1 && Math.abs(relCoords[1]) == 2)
+		|| (Math.abs(relCoords[0]) == 2 && Math.abs(relCoords[1]) == 1)) {
+	    
+	    return this.isWhite() != board.getPiece(finalCoords).isWhite();
+	    
+	 } else {
+	   return false;
+	 }
     }
 
 }
